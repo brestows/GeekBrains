@@ -23,6 +23,8 @@ namespace GameAttack
         public virtual void Draw()
         {           
             img = new Bitmap(Properties.Resources.star);
+            Color transparent = img.GetPixel(1, 1);
+            img.MakeTransparent(transparent);
             Game._buffer.Graphics.DrawImage(img, _position.X, _position.Y);
         }
 
