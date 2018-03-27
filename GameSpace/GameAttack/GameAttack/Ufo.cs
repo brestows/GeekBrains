@@ -14,6 +14,8 @@ namespace GameAttack
         public override void Draw()
         {
             img = new Bitmap(Properties.Resources.ufo);
+            Color transparent = img.GetPixel(1, 1);
+            img.MakeTransparent(transparent);
             SplashScreen._bfr.Graphics.DrawImage(img, _position.X, _position.Y);
         }
     }
