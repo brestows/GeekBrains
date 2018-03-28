@@ -8,19 +8,22 @@ using System.Drawing;
 namespace GameAttack
 {
     /// <summary>
-    /// Класс НЛО для SplashScreen
+    /// Класс Метеорита в виде спутника для главной формы
+    /// методы описаны в классе наследнике GameObject
     /// </summary>
-    class Ufo : GameObject
+    class Meteor : GameObject
     {
-        public Ufo(Point pos,  Size sz) : base(pos,  sz) { }
+        public Meteor(Point pos, Size sz) : base(pos, sz) { }
+
         private Bitmap img;
         public override void Draw()
         {
-            img = new Bitmap(Properties.Resources.ufo);
+            img = new Bitmap(Properties.Resources.star);
             Color transparent = img.GetPixel(1, 1);
             img.MakeTransparent(transparent);
-            SplashScreen._bfr.Graphics.DrawImage(img, _position.X, _position.Y);
+            Game._buffer.Graphics.DrawImage(img, _position.X, _position.Y);
         }
+
         public override void Update()
         {
             _position.X -= 3;
@@ -28,4 +31,3 @@ namespace GameAttack
         }
     }
 }
-

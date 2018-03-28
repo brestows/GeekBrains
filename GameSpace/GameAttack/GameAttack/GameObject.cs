@@ -7,32 +7,33 @@ using System.Drawing;
 
 namespace GameAttack
 {
-    class GameObject
+    /// <summary>
+    /// Базовый класс для игровык копонентов. Метеорита, пули, звезд и т.п.
+    /// </summary>
+    abstract class GameObject
     {
         protected Point _position;
-        protected Point _dir;
         protected Size _size;
-        private Bitmap img;
-        public GameObject(Point pos, Point dir, Size sz)
+        /// <summary>
+        /// базовый конструктор для наследников
+        /// </summary>
+        /// <param name="pos">позиция</param>
+        /// <param name="sz">размер</param>
+        public GameObject(Point pos, Size sz)
         {
             _position = pos;
-            _dir = dir;
             _size = sz;
         }
 
-        public virtual void Draw()
-        {           
-            img = new Bitmap(Properties.Resources.star);
-            Color transparent = img.GetPixel(1, 1);
-            img.MakeTransparent(transparent);
-            Game._buffer.Graphics.DrawImage(img, _position.X, _position.Y);
-        }
-
-        public virtual void Update()
-        {
-            _position.X -= 3;
-            if (_position.X < -60) _position.X = 799;
-        }
+        /// <summary>
+        /// Отрисовывает игровой компонент на форме
+        /// </summary>
+        abstract public void Draw();
+        /// <summary>
+        /// Реализует "анимацию" движения объектов, 
+        /// путём изменения координат
+        /// </summary>
+        abstract public void Update();
 
     }
 }

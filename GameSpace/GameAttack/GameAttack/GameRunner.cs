@@ -9,6 +9,9 @@ namespace GameAttack
 {
     class GameRunner
     {
+        /// <summary>
+        /// Запускаем "игрулю"
+        /// </summary>
         static void Main()
         {
             Form frm = new Form();

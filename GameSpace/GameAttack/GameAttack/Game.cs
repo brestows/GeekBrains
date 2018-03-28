@@ -7,17 +7,21 @@ using System.Windows.Forms;
 using System.Drawing;
 
 namespace GameAttack
-{
+{   
+    /// <summary>
+    /// Главная форма, отображающая все события "игры"
+    /// Методы повторяются из класса SplashScreen
+    /// </summary>
     static class Game
     {
         private static BufferedGraphicsContext _context;
         private static Timer time;
         public static BufferedGraphics _buffer;
-        public static GameObject[] _objects;
+        private static GameObject[] _objects;
+        private static Bullet[] _objsBullet;
         public static int Width  { get; set; }
         public static int Height { get; set; }
         
-
         static Game() { }
      
         public static void Init(Form frm)
@@ -58,6 +62,7 @@ namespace GameAttack
         public static void Load ()
         {
             _objects = new GameObject[75];
+            _objsBullet = new Bullet[25];
             Random rnd = new Random();
             for (int i = 0; i < _objects.Length; i++)
             {
@@ -65,17 +70,23 @@ namespace GameAttack
                 if (i%2 == 0)
                 {
                     int sz = rnd.Next(2, 5);
-                    _objects[i] = new Star(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Point(-i, 0), new Size(sz, sz));
+                    _objects[i] = new Star(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(sz, sz));
                 }
                 else if (i%3 == 0)
                 {                    
-                    _objects[i] = new Asterisk(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Point(-i, 0), new Size(3, 3));
+                    _objects[i] = new Asterisk(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
                 } 
                 else
                 {
-                    _objects[i] = new GameObject(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Point(-i, 0), new Size(3, 3));
+                    _objects[i] = new Meteor(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
                 }
             }
+            for (int i = 0; i < _objsBullet.Length; i++)
+            {
+                _objects[i] = new Bullet(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
+
+            }
+
         }
 
         public static void Update()

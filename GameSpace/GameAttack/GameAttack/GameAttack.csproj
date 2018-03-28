@@ -55,9 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asterisk.cs" />
+    <Compile Include="Bullet.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameRunner.cs" />
+    <Compile Include="Meteor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ufo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

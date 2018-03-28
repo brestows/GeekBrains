@@ -9,6 +9,9 @@ using System.Drawing;
 
 namespace GameAttack
 {
+    /// <summary>
+    /// Стартовая форма, с отображением меню
+    /// </summary>
     static class SplashScreen
     {
         private static BufferedGraphicsContext _context;
@@ -22,6 +25,10 @@ namespace GameAttack
 
         static SplashScreen() {}
 
+        /// <summary>
+        /// Инициализация формы
+        /// </summary>
+        /// <param name="frm">Форма инициализации</param>
         public static void Init(Form frm)
         {
             Graphics vgc;
@@ -46,6 +53,10 @@ namespace GameAttack
             time.Tick += new EventHandler(Timer_tick);
             Load();
         }
+        /// <summary>
+        /// Заполнение массива объектов
+        /// конкретными объектами определенного класса
+        /// </summary>
         public static void Load()
         {
             _objs = new GameObject[15];
@@ -53,11 +64,13 @@ namespace GameAttack
             for (int i = 0; i < _objs.Length; i++)
             {
                 int sz = rnd.Next(2, 5);
-                _objs[i] = new Ufo(new Point(rnd.Next(64, Width-64), rnd.Next(64, Height-64)), new Point(0, 0), new Size(sz, sz));
+                _objs[i] = new Ufo(new Point(rnd.Next(64, Width-64), rnd.Next(64, Height-64)),  new Size(sz, sz));
                 
             }
         }
-
+        /// <summary>
+        /// Отрисовка объектов на форме
+        /// </summary>
         public static void Draw()
         {
             _bfr.Graphics.Clear(Color.Black);
@@ -65,14 +78,23 @@ namespace GameAttack
                 obj.Draw();
             _bfr.Render();
         }
-
+        /// <summary>
+        /// скрываем отрисованные объекты
+        /// имитируя анимацию :)
+        /// </summary>
         public static void Destroy()
         {
             _bfr.Graphics.Clear(Color.Black);
        
             _bfr.Render();
         }
-
+        /// <summary>
+        /// Добавление кнопки определенной стилистики на форму
+        /// </summary>
+        /// <param name="text">Текс на кнопке</param>
+        /// <param name="sz">Размер кнопки</param>
+        /// <param name="local">Координаты расположение на форме</param>
+        /// <returns></returns>
         private static Button AddMenuButton(this String text, Size sz, Point local )
         {
             Button btn = new Button
@@ -90,6 +112,12 @@ namespace GameAttack
             return btn;
           
         }
+        /// <summary>
+        /// Метод отрабатываемый по нажатия какой-либо кнопки 
+        /// 
+        /// </summary>
+        /// <param name="sender">Отправитель события Клик</param>
+        /// <param name="arg">Аргументы события</param>
         private static void Menu_btn(object sender, EventArgs arg)
         {
             if (sender is Button)
@@ -118,6 +146,12 @@ namespace GameAttack
             }
         }
         
+        /// <summary>
+        /// Метод таймера, отрабатываем по каждому тику таймера, 
+        /// согласно его настроек
+        /// </summary>
+        /// <param name="sender">Отправитель события</param>
+        /// <param name="arg">Аргументы</param>
         private static void Timer_tick(object sender, EventArgs arg)
         {
             if (state)

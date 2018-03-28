@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 using System.Drawing;
 
 namespace GameAttack
-{
+{    
+    /// <summary>
+     /// Класс звездочки в виде текста для главной формы
+     /// методы описаны в классе наследнике GameObject
+     /// </summary>
     class Asterisk : GameObject
     {
-        public Asterisk(Point pos, Point dir, Size sz) : base(pos, dir, sz) { }
+        public Asterisk(Point pos, Size sz) : base(pos, sz) { }
 
         public override void Draw()
         {
@@ -18,5 +22,11 @@ namespace GameAttack
             System.Drawing.SolidBrush brsh = new System.Drawing.SolidBrush(System.Drawing.Color.White);
             Game._buffer.Graphics.DrawString("*", fnt, brsh, _position.X, _position.Y, frmt);
         }
-    }
+
+        public override void Update()
+        {
+            _position.X -= 3;
+            if (_position.X< -60) _position.X = 799;
+        }
+}
 }
