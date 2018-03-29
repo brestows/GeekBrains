@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace GameAttack
 {   
@@ -53,9 +54,11 @@ namespace GameAttack
         {
             _buffer.Graphics.Clear(Color.Black);
             foreach (GameObject obj in _objects)
-            {
                 obj.Draw();
-            }
+
+            foreach (Bullet blt in _objsBullet)
+                blt.Draw();
+            
             _buffer.Render();
         }
 
@@ -83,7 +86,7 @@ namespace GameAttack
             }
             for (int i = 0; i < _objsBullet.Length; i++)
             {
-                _objects[i] = new Bullet(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
+                _objsBullet[i] = new Bullet(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
 
             }
 
@@ -91,8 +94,13 @@ namespace GameAttack
 
         public static void Update()
         {
+            
+            foreach (Bullet blt in _objsBullet)
+                blt.Update();
+
             foreach (GameObject obj in _objects)
-                obj.Update();
+                    obj.Update();
+            
         }
         private static void Menu_btn(object sender, EventArgs arg)
         {
@@ -106,6 +114,20 @@ namespace GameAttack
         }
         private static void Timer_tick(object sender, EventArgs arg)
         {
+            foreach (Bullet blt in _objsBullet)
+            {
+                foreach (GameObject obj in _objects)
+                {
+                    if(obj is ICollision)
+                    {
+                      //  if (blt.Collision(obj as ICollision))
+                      //  {
+                            blt.ObjectPosition = new Point(659, blt.ObjectPosition.Y);
+                            obj.ObjectPosition = new Point(650, obj.ObjectPosition.Y);
+                     //   }
+                    } 
+                }
+            }
             Update();
             Draw();
         }

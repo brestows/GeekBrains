@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameAttack
 {
-    class Bullet : GameObject
+    class Bullet : GameObject, ICollision
     {
         public Bullet(Point pos, Size sz) : base(pos, sz) {}
         private Bitmap img;
@@ -24,7 +24,14 @@ namespace GameAttack
         {
             _position.X -= 3;
             if (_position.X < -60) _position.X = 799;
+            
         }
 
+        public Rectangle Rect => new Rectangle(_position, new Size(5,5));
+
+        public bool Collision(ICollision _object)
+        {
+            return _object.Rect.IntersectsWith(this.Rect);
+        }
     }
 }

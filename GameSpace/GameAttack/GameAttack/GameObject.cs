@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
+using System.Diagnostics;
+
 namespace GameAttack
 {
     /// <summary>
     /// Базовый класс для игровык копонентов. Метеорита, пули, звезд и т.п.
     /// </summary>
-    abstract class GameObject
+    abstract class GameObject 
     {
         protected Point _position;
         protected Size _size;
+        public Point ObjectPosition { get => _position; set => _position = value; }
         /// <summary>
         /// базовый конструктор для наследников
         /// </summary>
@@ -24,6 +27,8 @@ namespace GameAttack
             _position = pos;
             _size = sz;
         }
+        
+     
 
         /// <summary>
         /// Отрисовывает игровой компонент на форме
