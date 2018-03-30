@@ -27,9 +27,26 @@ namespace GameAttack
         /// <param name="sz">размер</param>
         public GameObject(Point pos, Size sz)
         {
-            _position = pos;
-            _size = sz;
-            rect = new Rectangle(pos,sz);
+            try
+            {
+                if (pos.X < 0 || pos.Y < 0)
+                {
+                    throw new GameObjectException("Ошибка позиции.");
+                } else if (_size.Height < 0 || _size.Width < 0)
+                {
+                    throw new GameObjectException("Ошибка размера");
+                }
+                else
+                { 
+                    _position = pos;
+                    _size = sz;
+                    rect = new Rectangle(pos, sz);
+                }
+            }
+            catch (GameObjectException e)
+            {
+                Debug.WriteLine(e);
+            }
         }
 
 

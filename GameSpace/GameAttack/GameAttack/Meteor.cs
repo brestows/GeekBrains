@@ -13,7 +13,7 @@ namespace GameAttack
     /// </summary>
     class Meteor : GameObject, ICollision
     {
-        public Meteor(Point pos, Size sz) : base(pos, sz) { rect.Size = new Size(15, 20); }
+        public Meteor(Point pos, Size sz) : base(pos, sz) { /*rect.Size = new Size(15, 20); */}
 
         private Bitmap img;
         public override void Draw()
@@ -21,7 +21,7 @@ namespace GameAttack
             img = new Bitmap(Properties.Resources.star);
             Color transparent = img.GetPixel(1, 1);
             img.MakeTransparent(transparent);
-            Game._buffer.Graphics.DrawImage(img, _position.X, _position.Y);
+            Game._buffer.Graphics.DrawImage(img, _position.X, _position.Y, _size.Width, _size.Height);
         }
 
         public override void Update()
@@ -30,6 +30,9 @@ namespace GameAttack
             if (_position.X < -60) _position.X = 799;
             rect.Location = _position;
         }
+        /// <summary>
+        /// Реализация методов интерфейса ICollision
+        /// </summary>
         public Rectangle Rect { get => rect; set => rect = value; }
         public bool Collision(ICollision _object)
         {

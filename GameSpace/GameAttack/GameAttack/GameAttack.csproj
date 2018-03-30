@@ -58,6 +58,7 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="GameObjectException.cs" />
     <Compile Include="GameRunner.cs" />
     <Compile Include="ICollision.cs" />
     <Compile Include="Meteor.cs" />

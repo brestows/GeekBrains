@@ -11,7 +11,7 @@ namespace GameAttack
     class Bullet : GameObject, ICollision
     {
         public Bullet(Point pos, Size sz) : base(pos, sz) {
-            rect.Size = new Size(5, 10);
+           // rect.Size = new Size(5, 10);
         }
         private Bitmap img;
 
@@ -21,15 +21,21 @@ namespace GameAttack
             Color transparent = img.GetPixel(0, 0);
             img.MakeTransparent(transparent);
             img.RotateFlip(RotateFlipType.Rotate180FlipY);
-            Game._buffer.Graphics.DrawImage(img, _position.X , _position.Y);
+            Game._buffer.Graphics.DrawImage(img, _position.X , _position.Y, _size.Width, _size.Height);
         }
+        /// <summary>
+        /// Реализация методов интерфейса ICollision
+        /// </summary>
         public Rectangle Rect { get => rect; set => rect = value; }
         public bool Collision(ICollision _object)
         {
-        //    Debug.WriteLine(" rect: " + rect + " Object: " + _object.Rect);
-
             return rect.IntersectsWith(_object.Rect);
         }
+        /// <summary>
+        /// Обновляем координаты обеъкта пули 
+        /// а так же проверяем на столкновение с 
+        /// метеоритом
+        /// </summary>
         public override void Update()
         {
             _position.X += 3;
@@ -41,7 +47,6 @@ namespace GameAttack
                 {
                     if (Collision(obj as ICollision))
                     {
-                        Debug.WriteLine(" COLLISON");
                         ObjectPosition = new Point(40, ObjectPosition.Y);
                         obj.ObjectPosition = new Point(800, obj.ObjectPosition.Y);
 

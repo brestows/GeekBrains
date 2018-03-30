@@ -27,9 +27,15 @@ namespace GameAttack
 
         public static void Init(Form frm)
         {
-            if (frm.Height > 1000 || frm.Width > 1000)
+            try
             {
-                throw new ArgumentOutOfRangeException("Form size is out of reange!");
+                if (frm.Height > 1000 || frm.Width > 1000)
+                {
+                    throw new ArgumentOutOfRangeException("Form size is out of reange!");
+                }
+            } catch
+            {
+                Debug.WriteLine("Введено слишком большое значение!");
             }
 
             Graphics vgc;
@@ -89,14 +95,12 @@ namespace GameAttack
                 } 
                 else
                 {
-                    _objects[i] = new Meteor(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
-                    //_objects[i] = new Meteor(new Point(750,300), new Size(3, 3));
+                    _objects[i] = new Meteor(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(35, 15));
                 }
             }
             for (int i = 0; i < _objsBullet.Length; i++)
             {
-                _objsBullet[i] = new Bullet(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
-               // _objsBullet[i] = new Bullet(new Point(750, 300), new Size(3, 3));
+                _objsBullet[i] = new Bullet(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(15, 5));
 
             }
 
