@@ -11,7 +11,7 @@ namespace GameAttack
     /// Класс Метеорита в виде спутника для главной формы
     /// методы описаны в классе наследнике GameObject
     /// </summary>
-    class Meteor : GameObject
+    class Meteor : GameObject, ICollision
     {
         public Meteor(Point pos, Size sz) : base(pos, sz) { }
 
@@ -30,6 +30,12 @@ namespace GameAttack
             if (_position.X < -60) _position.X = 799;
             rect.Location = _position;
         }
+        public Rectangle Rect { get => rect; set => rect = value; }
+        public bool Collision(ICollision _object)
+        {
 
+            return this.rect.IntersectsWith(_object.Rect);
+            //return this.Rect.IntersectsWith(_object.Rect);
+        }
     }
 }

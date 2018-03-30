@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameAttack
 {
-    class Bullet : GameObject
+    class Bullet : GameObject, ICollision
     {
         public Bullet(Point pos, Size sz) : base(pos, sz) {
        
@@ -22,12 +22,30 @@ namespace GameAttack
             img.RotateFlip(RotateFlipType.Rotate180FlipY);
             Game._buffer.Graphics.DrawImage(img, (_position.X-800)*-1, (_position.Y-600)*-1);
         }
-
+        public Rectangle Rect { get => rect; set => rect = value; }
+        public bool Collision(ICollision _object)
+        {
+          
+            return this.rect.IntersectsWith(_object.Rect);
+            //return this.Rect.IntersectsWith(_object.Rect);
+        }
         public override void Update()
         {
             _position.X -= 3;
             if (_position.X < -60) _position.X = 799;
             rect.Location = _position;
+            foreach (GameObject obj in Game._objects)
+            {
+                if (obj is ICollision)
+                {
+                    if (Collision(obj as ICollision))
+                    {
+                        ObjectPosition = new Point(0, ObjectPosition.Y);
+                        obj.ObjectPosition = new Point(500, obj.ObjectPosition.Y);
+
+                    }
+                }
+            }
         }
      }
 }

@@ -12,13 +12,13 @@ namespace GameAttack
     /// <summary>
     /// Базовый класс для игровык копонентов. Метеорита, пули, звезд и т.п.
     /// </summary>
-    abstract class GameObject: ICollision
+    abstract class GameObject
     {
         protected Point _position;
         protected Size _size;
         protected Rectangle rect;
         public Point ObjectPosition { get => _position; set => _position = value; }
-        public Rectangle Rect { get => rect; set => rect = value; }
+       
 
         /// <summary>
         /// базовый конструктор для наследников
@@ -44,11 +44,6 @@ namespace GameAttack
         /// </summary>
         abstract public void Update();
 
-        public bool Collision(ICollision _object)
-        {
-            Debug.WriteLine( this.rect.IntersectsWith(_object.Rect));
-            return this.rect.IntersectsWith(_object.Rect);
-            //return this.Rect.IntersectsWith(_object.Rect);
-        }
+    
     }
 }

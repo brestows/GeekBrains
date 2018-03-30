@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Diagnostics;
 
 namespace GameAttack
-{   
+{
     /// <summary>
     /// Главная форма, отображающая все события "игры"
     /// Методы повторяются из класса SplashScreen
@@ -18,23 +18,31 @@ namespace GameAttack
         private static BufferedGraphicsContext _context;
         private static Timer time;
         public static BufferedGraphics _buffer;
-        private static GameObject[] _objects;
+        public static GameObject[] _objects;
         private static Bullet[] _objsBullet;
-        public static int Width  { get; set; }
+        public static int Width { get; set; }
         public static int Height { get; set; }
-        
+
         static Game() { }
-     
+
         public static void Init(Form frm)
         {
+            if (frm.Height > 1000 || frm.Width > 1000)
+            {
+                throw new ArgumentOutOfRangeException("Form size is out of reange!");
+            }
+
             Graphics vgc;
             time = new Timer { Interval = 100 };
             time.Start();
             time.Tick += new EventHandler(Timer_tick);
             _context = BufferedGraphicsManager.Current;
             vgc = frm.CreateGraphics();
+            
+        
             Width = frm.Width;
             Height = frm.Height;
+           
             _buffer = _context.Allocate(vgc, new Rectangle(0, 0, Width, Height));
             Button btn = new Button
             {
@@ -114,23 +122,7 @@ namespace GameAttack
         }
         private static void Timer_tick(object sender, EventArgs arg)
         {
-            foreach (Bullet blt in _objsBullet)
-            {
-
-                foreach (GameObject obj in _objects)
-                {
-                    if (obj is Meteor)
-                    {
-                        
-                        if (blt.Collision(obj))
-                        {
-                            blt.ObjectPosition = new Point(0, blt.ObjectPosition.Y);
-                            obj.ObjectPosition = new Point(500, obj.ObjectPosition.Y);
-
-                        }
-                    }
-                }
-            }
+       
             Update();
             Draw();
         }
