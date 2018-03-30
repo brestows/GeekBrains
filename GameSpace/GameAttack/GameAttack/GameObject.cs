@@ -12,7 +12,7 @@ namespace GameAttack
     /// <summary>
     /// Базовый класс для игровык копонентов. Метеорита, пули, звезд и т.п.
     /// </summary>
-    abstract class GameObject 
+    abstract class GameObject: ICollision
     {
         protected Point _position;
         protected Size _size;
@@ -27,8 +27,13 @@ namespace GameAttack
             _position = pos;
             _size = sz;
         }
-        
-     
+
+        public Rectangle Rect => new Rectangle(_position, _size);
+
+        public bool Collision(ICollision _object)
+        {
+            return _object.Rect.IntersectsWith(this.Rect);
+        }
 
         /// <summary>
         /// Отрисовывает игровой компонент на форме
