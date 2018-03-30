@@ -13,7 +13,7 @@ namespace GameAttack
     /// </summary>
     class Meteor : GameObject, ICollision
     {
-        public Meteor(Point pos, Size sz) : base(pos, sz) { }
+        public Meteor(Point pos, Size sz) : base(pos, sz) { rect.Size = new Size(15, 20); }
 
         private Bitmap img;
         public override void Draw()
@@ -33,9 +33,7 @@ namespace GameAttack
         public Rectangle Rect { get => rect; set => rect = value; }
         public bool Collision(ICollision _object)
         {
-
             return this.rect.IntersectsWith(_object.Rect);
-            //return this.Rect.IntersectsWith(_object.Rect);
         }
     }
 }

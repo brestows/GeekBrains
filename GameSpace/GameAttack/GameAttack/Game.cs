@@ -90,11 +90,13 @@ namespace GameAttack
                 else
                 {
                     _objects[i] = new Meteor(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
+                    //_objects[i] = new Meteor(new Point(750,300), new Size(3, 3));
                 }
             }
             for (int i = 0; i < _objsBullet.Length; i++)
             {
-                _objsBullet[i] = new Bullet(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(6, 6));
+                _objsBullet[i] = new Bullet(new Point(rnd.Next(0, 800), rnd.Next(0, 600)), new Size(3, 3));
+               // _objsBullet[i] = new Bullet(new Point(750, 300), new Size(3, 3));
 
             }
 
