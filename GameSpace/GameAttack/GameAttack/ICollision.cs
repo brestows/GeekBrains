@@ -14,6 +14,6 @@ namespace GameAttack
     interface ICollision
     {
         bool Collision(ICollision _object);
-        Rectangle Rect { get; }
+        Rectangle Rect { get; set; }
     }
 }

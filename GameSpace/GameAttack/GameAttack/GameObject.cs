@@ -16,24 +16,23 @@ namespace GameAttack
     {
         protected Point _position;
         protected Size _size;
+        protected Rectangle rect;
         public Point ObjectPosition { get => _position; set => _position = value; }
+        public Rectangle Rect { get => rect; set => rect = value; }
+
         /// <summary>
         /// базовый конструктор для наследников
-        /// </summary>
+        /// </summary>3
         /// <param name="pos">позиция</param>
         /// <param name="sz">размер</param>
         public GameObject(Point pos, Size sz)
         {
             _position = pos;
             _size = sz;
+            rect = new Rectangle(pos,sz);
         }
 
-        public Rectangle Rect => new Rectangle(_position, _size);
 
-        public bool Collision(ICollision _object)
-        {
-            return _object.Rect.IntersectsWith(this.Rect);
-        }
 
         /// <summary>
         /// Отрисовывает игровой компонент на форме
@@ -45,5 +44,11 @@ namespace GameAttack
         /// </summary>
         abstract public void Update();
 
+        public bool Collision(ICollision _object)
+        {
+            Debug.WriteLine( this.rect.IntersectsWith(_object.Rect));
+            return this.rect.IntersectsWith(_object.Rect);
+            //return this.Rect.IntersectsWith(_object.Rect);
+        }
     }
 }

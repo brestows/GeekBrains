@@ -28,7 +28,7 @@ namespace GameAttack
         public static void Init(Form frm)
         {
             Graphics vgc;
-            time = new Timer { Interval = 1000 };
+            time = new Timer { Interval = 100 };
             time.Start();
             time.Tick += new EventHandler(Timer_tick);
             _context = BufferedGraphicsManager.Current;
@@ -116,16 +116,17 @@ namespace GameAttack
         {
             foreach (Bullet blt in _objsBullet)
             {
+
                 foreach (GameObject obj in _objects)
                 {
                     if (obj is Meteor)
                     {
+                        
                         if (blt.Collision(obj))
                         {
-                            //Debug.WriteLine("COLLISION: Bullet" + blt.ObjectPosition + " METEOR " + obj.ObjectPosition);
+                            blt.ObjectPosition = new Point(0, blt.ObjectPosition.Y);
+                            obj.ObjectPosition = new Point(500, obj.ObjectPosition.Y);
 
-                            blt.ObjectPosition = new Point(659, blt.ObjectPosition.Y);
-                            obj.ObjectPosition = new Point(650, obj.ObjectPosition.Y);
                         }
                     }
                 }
