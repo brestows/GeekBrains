@@ -10,10 +10,9 @@ namespace GameAttack
 {
     class Bullet : GameObject, ICollision
     {
-        public Bullet(Point pos, Size sz) : base(pos, sz) {
-           // rect.Size = new Size(5, 10);
-        }
         private Bitmap img;
+        public Bullet(Point pos, Size sz) : base(pos, sz) { }
+        
 
         public override void Draw()
         {

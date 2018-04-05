@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
+
 
 
 namespace GameAttack
@@ -110,7 +112,6 @@ namespace GameAttack
             btn.Text = text;
             btn.Click += new EventHandler(Menu_btn);
             return btn;
-          
         }
         /// <summary>
         /// Метод отрабатываемый по нажатия какой-либо кнопки 
@@ -131,10 +132,13 @@ namespace GameAttack
                         break;
                     case "START":
                         frmParent.Hide();
-                        Form frm = new Form();
-                        frm.Width = 800;
-                        frm.Height = 600;
-                        frm.ControlBox = false;
+                        Form frm = new Form
+                        {
+                            Width = 800,
+                            Height = 600,
+                            ControlBox = false
+                        };
+                        frm.KeyPreview = true;
                         Game.Init(frm);
                         Game.Draw();
                         frm.ShowDialog();
@@ -145,7 +149,7 @@ namespace GameAttack
                 }
             }
         }
-        
+
         /// <summary>
         /// Метод таймера, отрабатываем по каждому тику таймера, 
         /// согласно его настроек

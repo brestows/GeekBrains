@@ -67,6 +67,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ship.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Star.cs" />
     <Compile Include="Ufo.cs" />
@@ -103,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bullet.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UsY9MVb.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

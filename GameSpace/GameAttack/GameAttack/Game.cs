@@ -22,11 +22,12 @@ namespace GameAttack
         private static Bullet[] _objsBullet;
         public static int Width { get; set; }
         public static int Height { get; set; }
-
+        private static Ship Souz = new Ship(new Point(25,300),new Size(94,64));
         static Game() { }
 
         public static void Init(Form frm)
         {
+            frm.KeyDown += FromKeyDown;
             try
             {
                 if (frm.Height > 1000 || frm.Width > 1000)
@@ -61,7 +62,16 @@ namespace GameAttack
             btn.Text = "MENU";
             btn.Click += new EventHandler(Menu_btn);
             frm.Controls.Add(btn);
+            
             Load();
+        }
+
+        private static void FromKeyDown(object sender, KeyEventArgs e)
+        {
+            Debug.WriteLine("KEY PRESS");
+            Debug.WriteLine(e.KeyCode);
+            if (e.KeyCode == Keys.Up) Souz.Up();
+            if (e.KeyCode == Keys.Down) Souz.Down();
         }
 
         public static void Draw()
@@ -72,7 +82,8 @@ namespace GameAttack
 
             foreach (Bullet blt in _objsBullet)
                 blt.Draw();
-            
+
+            Souz.Draw();
             _buffer.Render();
         }
 
@@ -128,7 +139,6 @@ namespace GameAttack
         }
         private static void Timer_tick(object sender, EventArgs arg)
         {
-       
             Update();
             Draw();
         }
