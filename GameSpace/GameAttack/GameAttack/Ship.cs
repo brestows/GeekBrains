@@ -34,7 +34,6 @@ namespace GameAttack
 
         public void Up()
         {
-            Console.WriteLine(_position.Y);
             if (_position.Y < Game.Height )
             {
                 _position.Y -= 3; 

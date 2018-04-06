@@ -10,6 +10,11 @@ namespace GameAttack
 {
     class Bullet : GameObject, ICollision
     {
+
+
+        public delegate void CollisionEvent();
+        public static event CollisionEvent ColEvent;
+
         private Bitmap img;
         public Bullet(Point pos, Size sz) : base(pos, sz) { }
         
@@ -46,9 +51,9 @@ namespace GameAttack
                 {
                     if (Collision(obj as ICollision))
                     {
-                        ObjectPosition = new Point(40, ObjectPosition.Y);
+                        ColEvent();
+                        ObjectPosition = new Point(40, ObjectPosition.Y);                        
                         obj.ObjectPosition = new Point(800, obj.ObjectPosition.Y);
-
                     }
                 }
             }
