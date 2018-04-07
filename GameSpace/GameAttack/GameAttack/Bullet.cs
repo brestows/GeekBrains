@@ -42,19 +42,20 @@ namespace GameAttack
         /// </summary>
         public override void Update()
         {
-            _position.X += 3;
-            if (_position.X > 799) _position.X = 60;
-            rect.Location = _position;
-            foreach (GameObject obj in Game._objects)
+            _position.X += 5;
+            if (_position.X > 820)
             {
-                if (obj is ICollision)
+                Game._objsBullet.Remove(this);
+            }
+            rect.Location = _position;
+            foreach (Meteor obj in Game._objsMeteor.ToArray())
+            {
+                if (Collision(obj as ICollision))
                 {
-                    if (Collision(obj as ICollision))
-                    {
-                        ColEvent();
-                        ObjectPosition = new Point(40, ObjectPosition.Y);                        
-                        obj.ObjectPosition = new Point(800, obj.ObjectPosition.Y);
-                    }
+                    ColEvent();
+                    Game._objsBullet.Remove(this);
+                    Random rnd = new Random();
+                    obj.ObjectPosition = new Point(900, rnd.Next(0,600));
                 }
             }
         }

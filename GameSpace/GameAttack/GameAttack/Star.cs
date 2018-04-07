@@ -14,7 +14,6 @@ namespace GameAttack
     class Star : GameObject
     {
         public Star(Point pos, Size sz) : base(pos, sz) { }
-
         public override void Draw()
         {
             Game._buffer.Graphics.DrawLine(Pens.White, _position.X, _position.Y, _size.Width + _position.X, _size.Height + _position.Y);
