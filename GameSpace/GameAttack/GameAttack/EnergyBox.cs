@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GameAttack
 {
+    /// <summary>
+    /// Аптечка. При столкноведии дает +5 энергии
+    /// </summary>
     class EnergyBox : GameObject, ICollision
     {
 

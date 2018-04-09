@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameAttack
 {
+    
     class GameRunner
     {
         /// <summary>
@@ -14,6 +15,7 @@ namespace GameAttack
         /// </summary>
         static void Main()
         {
+            
             Form frm = new Form();
             frm.Width = 300;
             frm.Height = 500;

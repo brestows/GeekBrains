@@ -62,6 +62,7 @@
     <Compile Include="GameObjectException.cs" />
     <Compile Include="GameRunner.cs" />
     <Compile Include="ICollision.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Meteor.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

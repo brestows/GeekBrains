@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 namespace GameAttack
 {
+    /// <summary>
+    /// Класс пули, унаследован от GameObject как игровой объект
+    /// а так же от ICollision для определения столкновений
+    /// </summary>
     class Bullet : GameObject, ICollision
     {
 
@@ -55,7 +59,7 @@ namespace GameAttack
                     ColEvent();
                     Game._objsBullet.Remove(this);
                     Random rnd = new Random();
-                    obj.ObjectPosition = new Point(900, rnd.Next(0,600));
+                    Game._objsMeteor.Remove(obj);
                 }
             }
         }

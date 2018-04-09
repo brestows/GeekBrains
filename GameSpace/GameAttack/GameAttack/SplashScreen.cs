@@ -34,6 +34,7 @@ namespace GameAttack
         public static void Init(Form frm)
         {
             Graphics vgc;
+            Game.logger("Splash Screen Form Initialized");
             _context = BufferedGraphicsManager.Current;
             vgc = frm.CreateGraphics();
             Width = frm.Width;
@@ -61,6 +62,7 @@ namespace GameAttack
         /// </summary>
         public static void Load()
         {
+            Game.logger("Load object on SplashScreen form.");
             _objs = new GameObject[15];
             Random rnd = new Random();
             for (int i = 0; i < _objs.Length; i++)
@@ -132,6 +134,7 @@ namespace GameAttack
                         break;
                     case "START":
                         frmParent.Hide();
+                        Game.logger("Start NEW game!  Let's go...");
                         Form frm = new Form
                         {
                             Width = 800,
@@ -143,6 +146,7 @@ namespace GameAttack
                         Game.Draw();
                         frm.ShowDialog();
                         frmParent.Show();
+                        frm.Dispose();
                         break;
                     case "POINTS":
                         break;

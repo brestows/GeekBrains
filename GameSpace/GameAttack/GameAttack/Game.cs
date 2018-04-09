@@ -26,13 +26,28 @@ namespace GameAttack
         private static int UserScore = 0;
         private static Random rnd = new Random();
         private static bool ShipDie = false;
+        private static int currentCountMeteor = 1;
+        private static int maxCountMeteor = 1;
+        static public Action<string> logger = new Action<string>(Logger.WriteToConsole);
+        /// <summary>
+        /// класс коробля, делаем его в единственном экземпляру 
+        /// </summary>
         private static Ship Souz = new Ship(new Point(25, 300), new Size(94, 64));
+        /// <summary>
+        /// Аптечку так же делаем одну, да бы ее не пересоздавать постоянно
+        /// будем манипулироваться ее координатами
+        /// </summary>
         public static EnergyBox MedBox = new EnergyBox(new Point(0, 0), new Size(35, 35));
-        static Game() { }
+
+        static Game() {
+            logger += Logger.WriteToFile;
+        }
 
         public static void Init(Form frm)
         {
+            Game.logger("Main form initialized");
             frm.KeyDown += FromKeyDown;
+            frm.FormClosed += Exit;
             Bullet.ColEvent += ObjectCollision;
             Ship.ShipDie += GameOver;
             Ship.EnergyUPevent += HideEnergyBox;
@@ -44,7 +59,7 @@ namespace GameAttack
                 }
             } catch
             {
-                Debug.WriteLine("Введено слишком большое значение!");
+               Game.logger("Введено слишком большое значение!");
             }
 
             Graphics vgc;
@@ -96,6 +111,16 @@ namespace GameAttack
 
             Load();
         }
+
+        private static void Exit(object sender, FormClosedEventArgs e)
+        {
+            Console.WriteLine("close form");
+            currentCountMeteor = 1;
+            maxCountMeteor = 1;
+            UserScore = 0;
+            _objsMeteor.Clear();
+        }
+
         /// <summary>
         /// Cкрываем аптечку, после того как пользователь ей воспользовался.
         /// </summary>
@@ -117,7 +142,16 @@ namespace GameAttack
         private static void ObjectCollision()
         {
             UserScore++;
-            _objsMeteor.Add(new Meteor(new Point(800, rnd.Next(0, 600)), new Size(35, 15)));
+            currentCountMeteor--;
+            //Game.logger("New meteor!");
+            if (currentCountMeteor < 1 )
+            {
+                maxCountMeteor++;
+                currentCountMeteor = maxCountMeteor;
+               _objsMeteor =  Enumerable.Range(0,maxCountMeteor).Select(x=> 
+                new Meteor(new Point(rnd.Next(650, 800), rnd.Next(0, 600)), new Size(35, 15))).ToList();
+            }
+            //_objsMeteor.Add(new Meteor(new Point(800, rnd.Next(0, 600)), new Size(35, 15)));
         }
 
         /// <summary>
@@ -174,6 +208,7 @@ namespace GameAttack
 
         public static void Load()
         {
+            Game.logger("Load game object on main form");
             _objects = new GameObject[75];
 
             for (int i = 0; i < _objects.Length; i++)
@@ -213,6 +248,7 @@ namespace GameAttack
             /// показываем аптечку
             if (bul > 41 && bul < 48)
             {
+                Game.logger("I need help!");
                 MedBox.IneedHelp();
             }
 
@@ -224,12 +260,12 @@ namespace GameAttack
         /// <param name="arg"></param>
         private static void Menu_btn(object sender, EventArgs arg)
         {
+            Game.logger("Bye-bye");
             if (sender is Button)
             {
                 Button btn = sender as Button;
                 time.Dispose();
-                Form frm = btn.FindForm();
-                frm.Dispose();
+                btn.FindForm().Dispose();               
             }
         }
 

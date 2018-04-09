@@ -10,9 +10,11 @@ namespace GameAttack
     class Ship : GameObject, ICollision
     {
         public delegate void GameOver();
+        // Событие уведомляющее о конце игры
         public static event GameOver ShipDie;
 
         public delegate void MedBoxCollision();
+        //Событие уведомляющее о увеличении энергии коробля
         public static event MedBoxCollision EnergyUPevent;
 
         private Bitmap img;
@@ -39,6 +41,7 @@ namespace GameAttack
             {
                 _energy = 0;
                 ShipDie();
+                Game.logger("GAME OVER!");
             }
         }
 
@@ -50,6 +53,7 @@ namespace GameAttack
             } else
             {
                 _energy = 100;
+                Game.logger("Ship energy is FULL");
             }
         }
         #endregion
@@ -104,13 +108,15 @@ namespace GameAttack
             {
                 EnergyUp(25);
                 EnergyUPevent();
-               
+                Game.logger("Ship energy UP");
+
             }
             foreach (Meteor obj in Game._objsMeteor.ToArray())
             {
                 if (Collision(obj as ICollision))
                 {
-                    EnergyLow(5);            
+                    EnergyLow(5);
+                    Game.logger("Ship energy LOW");
                     Random rnd = new Random();
                     obj.ObjectPosition = new Point(900, rnd.Next(0, 600));
                 }
