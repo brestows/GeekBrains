@@ -20,6 +20,9 @@ namespace Lesson5
     public partial class NewEmployee : Window
     {
         private dbCollector db = dbCollector.Init();
+        private string oldUserName = String.Empty;
+        private string oldDepartment = String.Empty;
+
         public NewEmployee()
         {
             InitializeComponent();
@@ -28,7 +31,10 @@ namespace Lesson5
 
         public NewEmployee(string user,string department):this()
         {
-           
+            oldDepartment = department;
+            oldUserName = user;
+            cmbEmployeeDepartment.SelectedItem = department;
+            txtNewEmployee.Text = user;
         }
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)

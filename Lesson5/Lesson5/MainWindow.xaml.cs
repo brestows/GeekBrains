@@ -66,8 +66,19 @@ namespace Lesson5
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
         {
-            NewEmployee frm = new NewEmployee();
-            frm.ShowDialog();
+            if (lstDepartment.Items.Count > 0)
+            {
+                NewEmployee frm = new NewEmployee();
+                frm.ShowDialog();
+            }
+        }
+
+        private void btnDeleteEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstEmployee.SelectedIndex > -1)
+            {
+                lstEmployee.Items.RemoveAt(lstEmployee.SelectedIndex);
+            }
         }
     }
 }

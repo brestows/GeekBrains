@@ -74,7 +74,7 @@
 				<ColumnDefinition Width="33*"/>
 			</Grid.ColumnDefinitions>
 			<Button x:Name="btnNewEmployee" Content="Новый сотрудник" Grid.Column="2" Margin="5" Click="btnNewEmployee_Click"/>
-			<Button x:Name="btnDeleteEmployee" Content="Удалить" Grid.Column="1" Margin="5"/>
+			<Button x:Name="btnDeleteEmployee" Content="Удалить" Grid.Column="1" Margin="5" Click="btnDeleteEmployee_Click"/>
 		</Grid>
 	</Grid>
 </Window>
