@@ -22,7 +22,7 @@ namespace Lesson5
         private dbCollector db = dbCollector.Init();
         private string oldUserName = String.Empty;
         private string oldDepartment = String.Empty;
-
+        private bool isRename = false;
         public NewEmployee(string department)
         {
             oldDepartment = department;
@@ -34,13 +34,22 @@ namespace Lesson5
         public NewEmployee(string user,string department):this(department)
         {
             oldUserName = user;
+            isRename = true;
             cmbEmployeeDepartment.SelectedItem = department;
             txtNewEmployee.Text = user;
+            btnNewEmployee.Content = "Сохранить";
         }
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
         {
-            db.EmployeeAdd(cmbEmployeeDepartment.Text, txtNewEmployee.Text);
+            if (isRename)
+            {
+                db.DeaprtmentRepalce(oldDepartment, cmbEmployeeDepartment.SelectedItem.ToString());
+            }
+            else
+            {
+                db.EmployeeAdd(cmbEmployeeDepartment.Text, txtNewEmployee.Text);
+            }
         }
     }
 }

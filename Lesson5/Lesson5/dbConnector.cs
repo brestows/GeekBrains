@@ -95,5 +95,14 @@ namespace Lesson5
             }
         }
 
+        public void ChangeDepartment(string old, string _new)
+        {
+            if (dicDepartment.ContainsKey(_new))
+            {
+                dicDepartment.Add(_new, dicDepartment[old]);
+                dicDepartment.Remove(old);
+            }
+        }
+
     }
 }
