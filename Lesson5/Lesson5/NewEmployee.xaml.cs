@@ -28,9 +28,10 @@ namespace Lesson5
             oldDepartment = department;
             InitializeComponent();
             cmbEmployeeDepartment.ItemsSource = db.getListDepartment();
+            db.itsOK += Close;
         }
 
-        public NewEmployee(string user,string department):this()
+        public NewEmployee(string user,string department):this(department)
         {
             oldUserName = user;
             cmbEmployeeDepartment.SelectedItem = department;
@@ -39,7 +40,7 @@ namespace Lesson5
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
         {
-            db.
+            db.EmployeeAdd(cmbEmployeeDepartment.Text, txtNewEmployee.Text);
         }
     }
 }

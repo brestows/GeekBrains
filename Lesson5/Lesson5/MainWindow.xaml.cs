@@ -30,8 +30,12 @@ namespace Lesson5
         private void UpdateListDepartment(string obj)
         {
             lstDepartment.Items.Clear();
-            foreach(string itm in db.getListDepartment())
-                lstDepartment.Items.Add(itm);
+            foreach(string itm in db.getListDepartment()) {
+                ListBoxItem it = new ListBoxItem();
+                it.Content = itm;
+                it.Selected += lstDepartment_MouseLeftButtonDown;
+                lstDepartment.Items.Add(it);
+            }
         }
 
         private void btnDeleteDepartment_Click(object sender, RoutedEventArgs e)
@@ -54,21 +58,27 @@ namespace Lesson5
 
         private void lstDepartment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            NewDepartment frm = new NewDepartment(lstDepartment.SelectedItem.ToString());
-            frm.ShowDialog();
+            if (lstDepartment.Items.Count > 0 && lstDepartment.SelectedItem.ToString() != String.Empty)
+            {
+                NewDepartment frm = new NewDepartment(lstDepartment.SelectedItem.ToString());
+                frm.ShowDialog();
+            }
         }
 
         private void lstEmployee_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            NewEmployee frm = new NewEmployee(lstEmployee.SelectedItem.ToString(), lstDepartment.SelectedItem.ToString());
-            frm.ShowDialog();
+            if (lstDepartment.Items.Count > 0 && lstDepartment.SelectedItem.ToString() != String.Empty)
+            {
+                NewEmployee frm = new NewEmployee(lstEmployee.SelectedItem.ToString(), lstDepartment.SelectedItem.ToString());
+                frm.ShowDialog();
+            }
         }
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if (lstDepartment.Items.Count > 0)
+            if (lstDepartment.Items.Count > 0 && lstDepartment.SelectedItem.ToString() != String.Empty)
             {
-                NewEmployee frm = new NewEmployee();
+                NewEmployee frm = new NewEmployee(lstDepartment.SelectedItem.ToString());
                 frm.ShowDialog();
             }
         }
@@ -79,6 +89,15 @@ namespace Lesson5
             {
                 lstEmployee.Items.RemoveAt(lstEmployee.SelectedIndex);
             }
+        }
+
+        private void lstDepartment_MouseLeftButtonDown(object sender, RoutedEventArgs e)
+        {
+            lstEmployee.Items.Clear();
+            ListBoxItem lbi = e.Source as ListBoxItem;
+            foreach (string itm in db.getListEmployee(lbi.Content.ToString()))
+                lstEmployee.Items.Add(itm);
+
         }
     }
 }

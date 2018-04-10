@@ -75,17 +75,21 @@ namespace Lesson5
             return dicDepartment.Keys.ToList();
         }
 
-        public List<string> getListEmployee()
+        public List<string> getListEmployee(string department)
         {
-            return dicDepartment.Keys.ToList();
+            List<Emplayee> tm = dicDepartment[department];
+            List<string> tp = new List<string>();
+            foreach (Emplayee t in tm)
+                tp.Add(t.Name);
+            return tp;
         }
 
         public void EmployeeAdd(string department, string name)
         {
+            
             if (dicDepartment.ContainsKey(department))
             {
-                dicDepartment[department].Add(new Emplayee(name))
-                dicDepartment.Add(name, new List<Emplayee>());
+                dicDepartment[department].Add(new Emplayee(name)); 
                 itsOK();
                 evDepartmentAdd(name);
             }

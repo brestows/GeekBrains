@@ -32,7 +32,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
-			<ListBox x:Name="lstDepartment" MouseDoubleClick="lstDepartment_MouseDoubleClick" />
+			<ListBox x:Name="lstDepartment" MouseDoubleClick="lstDepartment_MouseDoubleClick"/>
 
 		</Grid>
 		<Grid x:Name="grdDepartmenFooter" Grid.Column="0" Grid.Row="2" >
