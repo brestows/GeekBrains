@@ -23,15 +23,15 @@ namespace Lesson5
         private string oldUserName = String.Empty;
         private string oldDepartment = String.Empty;
 
-        public NewEmployee()
+        public NewEmployee(string department)
         {
+            oldDepartment = department;
             InitializeComponent();
             cmbEmployeeDepartment.ItemsSource = db.getListDepartment();
         }
 
         public NewEmployee(string user,string department):this()
         {
-            oldDepartment = department;
             oldUserName = user;
             cmbEmployeeDepartment.SelectedItem = department;
             txtNewEmployee.Text = user;
@@ -39,7 +39,7 @@ namespace Lesson5
 
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
         {
-
+            db.
         }
     }
 }

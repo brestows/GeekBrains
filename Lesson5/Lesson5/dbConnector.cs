@@ -79,5 +79,17 @@ namespace Lesson5
         {
             return dicDepartment.Keys.ToList();
         }
+
+        public void EmployeeAdd(string department, string name)
+        {
+            if (dicDepartment.ContainsKey(department))
+            {
+                dicDepartment[department].Add(new Emplayee(name))
+                dicDepartment.Add(name, new List<Emplayee>());
+                itsOK();
+                evDepartmentAdd(name);
+            }
+        }
+
     }
 }
