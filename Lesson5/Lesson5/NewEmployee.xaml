@@ -29,7 +29,7 @@
 				HorizontalAlignment="Left"
 			/>
 		<Button x:Name="btnNewEmployee" Content="Новый сотрудник" Grid.Row="4" Margin="5" Click="btnNewEmployee_Click"/>
-		<TextBox x:Name="txtNewEmployee" Grid.Row="3" Margin="5"/>
+		<TextBox x:Name="txtNewEmployee" Grid.Row="3" Margin="5" />
 		<ComboBox x:Name="cmbEmployeeDepartment" Margin="5" Grid.Row="1"/>
 	</Grid>
 </Window>

@@ -9,6 +9,6 @@ namespace Lesson5
     class Emplayee
     {
         public string Name { get; set; }
-        public Emplayee(string name ) => Name = name; 
+        public Emplayee(string name ) => this.Name = name; 
     }
 }

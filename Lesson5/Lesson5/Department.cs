@@ -9,6 +9,6 @@ namespace Lesson5
     class Department
     {
         public string Name { get; set; }
-        public Department(string name) {Name = name; }
+        public Department(string name) => this.Name = name; 
     }
 }
