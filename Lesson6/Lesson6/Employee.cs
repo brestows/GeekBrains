@@ -9,13 +9,13 @@ namespace Lesson6
     /// <summary>
     /// Класс описывающий сотрудника 
     /// </summary>
-    class Emplayee
+    class Employee
     {
         public string Name { get; set; }
         public string Salary { get; set; }
         public int Age { get; set; }
-        private Emplayee() { }
-        public Emplayee(string name, string salary, int age) {
+        private Employee() { }
+        public Employee(string name, string salary, int age) {
             this.Name = name;
             this.Age = age;
             this.Salary = salary;

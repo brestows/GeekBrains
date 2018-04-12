@@ -23,15 +23,28 @@ namespace Lesson6
         private Juggler jg;
         public MainWindow()
         {
-            
             InitializeComponent();
-            jg = new Juggler();
+            jg = Juggler.getInstance();
             lstDepartmentView.ItemsSource = jg.Departments;
+            lstEmployeeView.ItemsSource = jg.Employee;
+            this.Closing += delegate { jg.SaveData(); };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             jg.AddDepartments();
+        }
+
+        private void RemoveDepartment(object sender, RoutedEventArgs e)
+        {
+            lstDepartmentView.Items.RemoveAt(lstDepartmentView.SelectedIndex);
+            //lstDepartmentView.ItemsSource
+        }
+
+        private void AddEmployee(object sender, RoutedEventArgs e)
+        {
+            NewEmployee employee = new NewEmployee();
+            employee.ShowDialog();
         }
     }
 }

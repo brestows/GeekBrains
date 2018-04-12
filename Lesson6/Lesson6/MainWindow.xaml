@@ -8,17 +8,54 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="25"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="35"/>
 		</Grid.RowDefinitions>
-		<ListView x:Name="lstDepartmentView" Margin="5" Grid.Row="0" >
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="40*"/>
+			<ColumnDefinition Width="60*"/>
+		</Grid.ColumnDefinitions>
+		<ListView x:Name="lstDepartmentView" Margin="5" Grid.Row="1" >
 			<ListView.View>
 				<GridView>
-					<GridViewColumn Header="Департамент" Width="250" DisplayMemberBinding="{Binding Name}" />
-					<GridViewColumn Header="Сотрудников" Width="100" DisplayMemberBinding="{Binding Count}" />
+					<GridViewColumn Header="Департамент" Width="205" DisplayMemberBinding="{Binding Name}" />
+					<GridViewColumn Header="Сотрудников" Width="85"  DisplayMemberBinding="{Binding Count}" />
 				</GridView>
 			</ListView.View>
 		</ListView>
-		<Button Content="asdfasdf" Grid.Row="1" Click="Button_Click" />
+		<ListView x:Name="lstEmployeeView" Margin="5" Grid.Row="1" Grid.Column="1">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Фамилия Имя" Width="250" DisplayMemberBinding="{Binding Name}" />
+					<GridViewColumn Header="Возраст" Width="100" DisplayMemberBinding="{Binding Age}" />
+					<GridViewColumn Header="Зарплата" Width="100" DisplayMemberBinding="{Binding Salary}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+		<Grid Grid.Row="2" Grid.Column="0">
+			<Grid Grid.Row="2" Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="50*"/>
+					<ColumnDefinition Width="50*"/>
+					<ColumnDefinition Width="50*"/>
+				</Grid.ColumnDefinitions>
+				<Button Content="Новый отдел" Grid.Column="2" Margin="5"/>
+				<Button Content="Удалить" Grid.Column="0" Margin="5" Click="RemoveDepartment"/>
+				<Button Content="Изменить" Grid.Column="1" Margin="5"/>
+			</Grid>
+		</Grid>
+		<Grid Grid.Row="2" Grid.Column="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="50*"/>
+				<ColumnDefinition Width="50*"/>
+				<ColumnDefinition Width="50*"/>
+			</Grid.ColumnDefinitions>
+			<Button x:Name="btnNewEmployee" Content="Новый сотрудник" Grid.Column="2" Margin="5" Click="AddEmployee"/>
+			<Button Content="Удалить" Grid.Column="0" Margin="5"/>
+			<Button Content="Изменить" Grid.Column="1" Margin="5"/>
+		</Grid>
+		<Label x:Name="lblDepartment" Content=" Отделы компании:" FontSize="12" Grid.Column="0"/>
+		<Label x:Name="lblEmployee" Content=" Сотрудники отдела:" FontSize="12" Grid.Column="1"/>
 	</Grid>
 </Window>

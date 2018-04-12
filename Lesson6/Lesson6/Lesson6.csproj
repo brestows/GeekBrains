@@ -65,14 +65,28 @@
     <Compile Include="dataStorage.cs" />
     <Compile Include="dbConnector.cs" />
     <Compile Include="Department.cs" />
-    <Compile Include="Emplayee.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="Juggler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewDepartment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NewEmployee.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NewDepartment.xaml.cs">
+      <DependentUpon>NewDepartment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewEmployee.xaml.cs">
+      <DependentUpon>NewEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

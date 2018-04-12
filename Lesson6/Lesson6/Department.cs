@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,18 +10,36 @@ namespace Lesson6
 {
     class Department: IEquatable<Department>
     {
-        private ObservableCollection<Emplayee> Emplayees;
+        private ObservableCollection<Employee> employees;
         public string Name { get; set; }
         public Department(string name) {
             this.Name = name;
-            Emplayees = new ObservableCollection<Emplayee>();
+            employees = new ObservableCollection<Employee>();
         }
 
-        public int Count  => this.Emplayees.Count;
+        public int Count  => this.employees.Count;
+
+        public ObservableCollection<Employee> Employees{ get => this.employees; }
+
+        public void AddEmployee(Employee employee)
+        {
+            if (!this.employees.Contains(employee))
+            {
+                this.employees.Add(employee);
+            }
+        }
 
         public bool Equals(Department other)
         {
             return this.Name == other.Name;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            foreach (Employee empl in employees)
+            {
+                yield return (Employee)empl;
+            }
         }
     }
 }
