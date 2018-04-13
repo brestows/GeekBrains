@@ -56,7 +56,8 @@ namespace Lesson6
 
         internal void RenameDepartment(string name, string oldName)
         {
-            Department GetDepartment(oldName);
+            Department dp =  GetDepartment(oldName);
+            Console.WriteLine(dp.Name);
         }
 
         public void AddEmployee(string depName, Employee employee)

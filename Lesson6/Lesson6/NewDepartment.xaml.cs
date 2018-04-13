@@ -33,6 +33,7 @@ namespace Lesson6
                 txtNewDepartment.DataContext = jg.ActiveDepartment;
                 this.Activated += NewDepartment_Activated;
                 this.oldName = txtNewDepartment.Text;
+                btnNewDepartment.Content = "Сохранить";
             }
         }
 
@@ -43,18 +44,7 @@ namespace Lesson6
 
         private void btnNewDepartment_Click(object sender, RoutedEventArgs e)
         {
-            jg.AddDepartments(txtNewDepartment.Text, oldName);
-            //if (txtNewDepartment.Text != String.Empty)
-            //{
-            //    if (edit)
-            //    {
-            //        jg.AddDepartments(txtNewDepartment.Text);
-            //    }
-            //    else
-            //    {
-            //        jg.RenameDepartnments(oldName, txtNewDepartment.Text);
-            //    }
-            //}
+            jg.AddDepartments(txtNewDepartment.Text);
             Close();
         }
     }

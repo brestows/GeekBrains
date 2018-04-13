@@ -34,15 +34,10 @@ namespace Lesson6
         public int CurrentDepartment => db.CurrentDepartment;
         public Department ActiveDepartment => db.ActiveStorage.Departments[db.CurrentDepartment];
 
-        public void AddDepartments(string name, string oldName="")
+        public void AddDepartments(string name)
         {
-            if (oldName != String.Empty)
-            {
-                db.ActiveStorage.RenameDepartment(name, oldName);
-            } else
-            {
-                db.ActiveStorage.AddDepartment(new Department(name));
-            }
+            db.ActiveStorage.AddDepartment(new Department(name));
+
         }
 
         public void RemoveDepartments(Department dp)
