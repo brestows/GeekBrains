@@ -12,7 +12,7 @@
 			<ColumnDefinition Width="33*"/>
 			<ColumnDefinition Width="103*"/>
 		</Grid.ColumnDefinitions>
-		<Button x:Name="btnNewDepartment" Content="Новый отдел" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
-		<TextBox x:Name="txtNewDepartment" Margin="5"/>
+		<Button x:Name="btnNewDepartment" Content="Новый отдел" Grid.Column="1" Margin="5" Grid.ColumnSpan="2" Click="btnNewDepartment_Click"/>
+		<TextBox x:Name="txtNewDepartment" Margin="5" Text="{Binding Name}" />
 	</Grid>
 </Window>

@@ -15,7 +15,7 @@ namespace Lesson6
     class dataStorage : INotifyPropertyChanged
     {
         private static ObservableCollection<Department> departments;
-        private static Department currentDepartment=null;
+        private Juggler jg = Juggler.getInstance();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -38,9 +38,13 @@ namespace Lesson6
             return departments.Where(d => d.Name == name).FirstOrDefault();
         }
 
+        internal void RemoveDepartment(Department dp)
+        {
+            departments.Remove(dp);
+        }
+
         public ObservableCollection<Department> Departments { get => departments; }
-        public ObservableCollection<Employee> Employees { get => currentDepartment.Employees; }
-        public Department CurrentDepartment { get => currentDepartment; set => currentDepartment = value; }
+      
 
         public IEnumerator GetEnumerator()
         {
@@ -50,13 +54,21 @@ namespace Lesson6
             }
         }
 
+        internal void RenameDepartment(string name, string oldName)
+        {
+            Department GetDepartment(oldName);
+        }
+
         public void AddEmployee(string depName, Employee employee)
         {
             Department dep = GetDepartment(depName);
             if (departments.Contains(dep))
             {
+                Console.WriteLine($"Department {dep.Name} is Found");
                 dep.AddEmployee(employee);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Employees)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(dep.Employees)));
+                PropertyChanged?.Invoke(jg, new PropertyChangedEventArgs(nameof(jg.Departments)));
+
             }
         }
     }

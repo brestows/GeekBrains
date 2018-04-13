@@ -2,15 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lesson6
 {
-    class Department: IEquatable<Department>
+    class Department: IEquatable<Department>, INotifyPropertyChanged
     {
         private ObservableCollection<Employee> employees;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string Name { get; set; }
         public Department(string name) {
             this.Name = name;
@@ -25,7 +29,9 @@ namespace Lesson6
         {
             if (!this.employees.Contains(employee))
             {
+                Console.WriteLine("user is write");
                 this.employees.Add(employee);
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Employees)));
             }
         }
 
@@ -40,6 +46,11 @@ namespace Lesson6
             {
                 yield return (Employee)empl;
             }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

@@ -29,7 +29,8 @@ namespace Lesson6
 
         private void AddEmployee(object sender, RoutedEventArgs e)
         {
-            jg.AddEmployee(cmbEmployeeDepartment.Text, txtNewEmployee.Text, txtSalary.Text, Int32.Parse(txtAge.Text));
+            jg.AddEmployee(cmbEmployeeDepartment.Text.ToString(), txtNewEmployee.Text, txtSalary.Text, Int32.Parse(txtAge.Text));
+            Close();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,14 @@ namespace Lesson6
         enum CSV { DEPARTMENT,FIO,AGE,SALARY}
         private readonly string dbFile = "company.csv";
         private dataStorage storage;
-
+        private static int currentDepartment=0;
+        public int CurrentDepartment { get => currentDepartment; set => currentDepartment = value; }
         public dataStorage ActiveStorage => this.storage;
+        public ObservableCollection<Employee> Employees { get => storage.Departments[currentDepartment].Employees; }
 
         public dbConnector() {
             storage = new dataStorage();
+            currentDepartment = 0;
         }
 
         public void LoadData()
@@ -63,7 +67,7 @@ namespace Lesson6
 
         public void SaveData()
         {
-            using (StreamWriter wrt = new StreamWriter("test.save.txt", false, Encoding.UTF8))
+            using (StreamWriter wrt = new StreamWriter(dbFile, false, Encoding.UTF8))
             {
                 foreach (Department dp in storage)
                 {

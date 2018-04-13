@@ -19,9 +19,43 @@ namespace Lesson6
     /// </summary>
     public partial class NewDepartment : Window
     {
-        public NewDepartment()
+        private Juggler jg;
+        private bool edit = false;
+        private string oldName = String.Empty;
+        public NewDepartment(bool edit=false)
         {
             InitializeComponent();
+            jg = Juggler.getInstance();
+            if (edit)
+            {
+                Console.WriteLine("edit data");
+                this.edit = edit;
+                txtNewDepartment.DataContext = jg.ActiveDepartment;
+                this.Activated += NewDepartment_Activated;
+                this.oldName = txtNewDepartment.Text;
+            }
+        }
+
+        private void NewDepartment_Activated(object sender, EventArgs e)
+        {
+            this.oldName = txtNewDepartment.Text;
+        }
+
+        private void btnNewDepartment_Click(object sender, RoutedEventArgs e)
+        {
+            jg.AddDepartments(txtNewDepartment.Text, oldName);
+            //if (txtNewDepartment.Text != String.Empty)
+            //{
+            //    if (edit)
+            //    {
+            //        jg.AddDepartments(txtNewDepartment.Text);
+            //    }
+            //    else
+            //    {
+            //        jg.RenameDepartnments(oldName, txtNewDepartment.Text);
+            //    }
+            //}
+            Close();
         }
     }
 }
