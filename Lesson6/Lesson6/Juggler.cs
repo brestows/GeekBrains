@@ -30,7 +30,13 @@ namespace Lesson6
 
         public ObservableCollection<Department> Departments => db.ActiveStorage.Departments;
         //public ObservableCollection<Employee> Employee => db.Employees;
-        public ObservableCollection<Employee> Employee => db.ActiveStorage.Departments[db.CurrentDepartment].Employees;
+        public ObservableCollection<Employee> Employee { 
+            get => db.Employees;
+            set {
+                db.Employees = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Employee)));
+            }
+        }
         public int CurrentDepartment => db.CurrentDepartment;
         public Department ActiveDepartment => db.ActiveStorage.Departments[db.CurrentDepartment];
 
@@ -56,8 +62,7 @@ namespace Lesson6
         public void DepartmentChange(object sender, SelectionChangedEventArgs e)
         {
             db.CurrentDepartment = (sender as ListView).SelectedIndex;
-            PropertyChanged?.Invoke(db, new PropertyChangedEventArgs(nameof(db.Employees)));
-
-    }
+            Employee = db.ActiveStorage.Departments[db.CurrentDepartment].Employees;
+        }
     }
 }

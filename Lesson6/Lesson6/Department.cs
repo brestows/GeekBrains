@@ -23,7 +23,15 @@ namespace Lesson6
 
         public int Count  => this.employees.Count;
 
-        public ObservableCollection<Employee> Employees{ get => this.employees; }
+        public ObservableCollection<Employee> Employees{
+            get => this.employees;
+            set
+            {
+                Juggler jg = Juggler.getInstance();
+                employees = value;
+                PropertyChanged?.Invoke(jg, new PropertyChangedEventArgs(nameof(this.Employees )));
+            }
+        }
 
         public void AddEmployee(Employee employee)
         {

@@ -17,14 +17,21 @@ namespace Lesson6
         enum CSV { DEPARTMENT,FIO,AGE,SALARY}
         private readonly string dbFile = "company.csv";
         private dataStorage storage;
-        private static int currentDepartment=0;
-        public int CurrentDepartment { get => currentDepartment; set => currentDepartment = value; }
+        private static int currentIndexDepartment=0;
+        public int CurrentDepartment { get => currentIndexDepartment; set => currentIndexDepartment = value; }
         public dataStorage ActiveStorage => this.storage;
-        public ObservableCollection<Employee> Employees { get => storage.Departments[currentDepartment].Employees; }
+
+        public ObservableCollection<Employee> Employees {
+            get => storage.Departments[currentIndexDepartment].Employees;
+            set
+            {
+                storage.Departments[currentIndexDepartment].Employees = value;
+            }
+        }
 
         public dbConnector() {
             storage = new dataStorage();
-            currentDepartment = 0;
+            currentIndexDepartment = 0;
         }
 
         public void LoadData()

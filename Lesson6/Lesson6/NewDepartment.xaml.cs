@@ -28,7 +28,6 @@ namespace Lesson6
             jg = Juggler.getInstance();
             if (edit)
             {
-                Console.WriteLine("edit data");
                 this.edit = edit;
                 txtNewDepartment.DataContext = jg.ActiveDepartment;
                 this.Activated += NewDepartment_Activated;
