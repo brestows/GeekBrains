@@ -33,6 +33,7 @@ namespace Lesson6
                 txtNewDepartment.DataContext = jg.ActiveDepartment;
                 this.Activated += NewDepartment_Activated;
                 this.oldName = txtNewDepartment.Text;
+                this.Title = "Переименовать";
                 btnNewDepartment.Content = "Сохранить";
             }
         }

@@ -9,6 +9,7 @@
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="25"/>
+			<RowDefinition Height="25"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="35"/>
 		</Grid.RowDefinitions>
@@ -16,7 +17,7 @@
 			<ColumnDefinition Width="40*"/>
 			<ColumnDefinition Width="60*"/>
 		</Grid.ColumnDefinitions>
-		<ListView x:Name="lstDepartmentView" Margin="5" Grid.Row="1">
+		<ListView x:Name="lstDepartmentView" Margin="5" Grid.Row="2">
 			<ListView.View>
 				<GridView>
 					<GridViewColumn Header="Департамент" Width="205" DisplayMemberBinding="{Binding Name}" />
@@ -24,7 +25,7 @@
 				</GridView>
 			</ListView.View>
 		</ListView>
-		<ListView x:Name="lstEmployeeView" Margin="5" Grid.Row="1" Grid.Column="1">
+		<ListView x:Name="lstEmployeeView" Margin="5" Grid.Row="2" Grid.Column="1">
 			<ListView.View>
 				<GridView>
 					<GridViewColumn Header="Фамилия Имя" Width="250" DisplayMemberBinding="{Binding Name}" />
@@ -33,7 +34,7 @@
 				</GridView>
 			</ListView.View>
 		</ListView>
-		<Grid Grid.Row="2" Grid.Column="0">
+		<Grid Grid.Row="3" Grid.Column="0">
 			<Grid Grid.Row="2" Grid.Column="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="50*"/>
@@ -45,7 +46,7 @@
 				<Button x:Name="btnEdit" Content="Изменить" Grid.Column="1" Margin="5" Click="btnEdit_Click"/>
 			</Grid>
 		</Grid>
-		<Grid Grid.Row="2" Grid.Column="1">
+		<Grid Grid.Row="3" Grid.Column="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="50*"/>
 				<ColumnDefinition Width="50*"/>
@@ -55,7 +56,14 @@
 			<Button Content="Удалить" Grid.Column="0" Margin="5"/>
 			<Button Content="Изменить" Grid.Column="1" Margin="5"/>
 		</Grid>
-		<Label x:Name="lblDepartment" Content=" Отделы компании:" FontSize="12" Grid.Column="0"/>
-		<Label x:Name="lblEmployee" Content=" Сотрудники отдела:" FontSize="12" Grid.Column="1"/>
+		<Label x:Name="lblDepartment" Content=" Отделы компании:" FontSize="12" Grid.Column="0" Grid.Row="1"/>
+		<Label x:Name="lblEmployee" Content=" Сотрудники отдела:" FontSize="12" Grid.Column="1" Grid.Row="1"/>
+		<Menu Height="25" VerticalAlignment="Top" Grid.Row="0">
+			<MenuItem Header="Файл">
+				<Button Content="Инициализация БД" />
+				<Separator></Separator>
+				<Button Content="Выход" />
+			</MenuItem>
+		</Menu>
 	</Grid>
 </Window>
