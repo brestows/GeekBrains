@@ -29,7 +29,7 @@ namespace Lesson6
             {
                 Juggler jg = Juggler.getInstance();
                 employees = value;
-                PropertyChanged?.Invoke(jg, new PropertyChangedEventArgs(nameof(this.Employees )));
+                PropertyChanged?.Invoke(jg, new PropertyChangedEventArgs(nameof(jg.Employee )));
             }
         }
 
@@ -42,7 +42,16 @@ namespace Lesson6
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Employees)));
             }
         }
-
+        
+        public void RemoveEmployee(Employee employee)
+        {
+            if (this.employees.Contains(employee))
+            {
+                Console.WriteLine(employee.Name + " is removed");
+                this.employees.Remove(employee);
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Employees)));
+            }
+        }
         public bool Equals(Department other)
         {
             return this.Name == other.Name;

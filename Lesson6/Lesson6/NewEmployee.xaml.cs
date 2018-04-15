@@ -20,16 +20,72 @@ namespace Lesson6
     public partial class NewEmployee : Window
     {
         private Juggler jg;
-        public NewEmployee()
+        private bool edit = false;
+        /// <summary>
+        /// Тут храним данные до редактирования
+        /// </summary>
+        private Employee tmp;
+
+        private string oldDepartment = String.Empty;
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
+        /// <param name="edit">True если формаоткрыта для 
+        /// редактирования сотрудника, иначе false</param>
+        public NewEmployee(bool edit = false)
         {
             InitializeComponent();
             jg = Juggler.getInstance();
             cmbEmployeeDepartment.ItemsSource = jg.Departments;
+            if (edit)
+            {
+                this.edit = edit;
+                txtAge.DataContext = jg.ActiveEmployee;
+                txtNewEmployee.DataContext = jg.ActiveEmployee;
+                txtSalary.DataContext = jg.ActiveEmployee;
+                cmbEmployeeDepartment.SelectedItem = jg.ActiveDepartment;
+                this.Title = "Изменение сотрудника";
+                btnNewEmployee.Content = "Сохранить";
+                this.Activated += NewEmployee_Activated;
+             
+
+            }
+        }
+        /// <summary>
+        /// Сохраняем данные о сотруднике до 
+        /// их изменения
+        /// </summary>
+        /// <param name="sender">Отправитель сигнала</param>
+        /// <param name="e">Данные события</param>
+        private void NewEmployee_Activated(object sender, EventArgs e)
+        {
+            tmp = new Employee(txtNewEmployee.Text, txtSalary.Text, Int32.Parse(txtAge.Text));
+            oldDepartment = cmbEmployeeDepartment.Text.ToString();
         }
 
         private void AddEmployee(object sender, RoutedEventArgs e)
         {
-            jg.AddEmployee(cmbEmployeeDepartment.Text.ToString(), txtNewEmployee.Text, txtSalary.Text, Int32.Parse(txtAge.Text));
+
+            if (!edit)
+            {
+                jg.AddEmployee(
+                    cmbEmployeeDepartment.Text.ToString(), 
+                    txtNewEmployee.Text, 
+                    txtSalary.Text, 
+                    Int32.Parse(txtAge.Text));
+            } else
+            {
+                if (oldDepartment != cmbEmployeeDepartment.Text.ToString())
+                {
+                    Employee newEmployee = new Employee(txtNewEmployee.Text, txtSalary.Text, Int32.Parse(txtAge.Text));
+                    if (tmp.Equals(newEmployee)) {
+                        jg.MoveEmployee(cmbEmployeeDepartment.Text.ToString(),tmp);
+                    } else
+                    {
+                        jg.MoveEmployee(cmbEmployeeDepartment.Text.ToString(),newEmployee);
+                    }
+                }
+            }
             Close();
         }
     }

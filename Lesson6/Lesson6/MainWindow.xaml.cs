@@ -36,6 +36,13 @@ namespace Lesson6
             jg.RemoveDepartments(lstDepartmentView.SelectedItem as Department);
         }
 
+        private void RemoveEmployee(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Try remove employee");
+            jg.RemoveEmployee(lstEmployeeView.SelectedItem as Employee);
+        }
+
+
         private void AddEmployee(object sender, RoutedEventArgs e)
         {
             NewEmployee employee = new NewEmployee();
@@ -52,6 +59,13 @@ namespace Lesson6
         {
             NewDepartment department = new NewDepartment(true);
             department.ShowDialog();
+        }
+
+        private void EditEmployee(object sender, RoutedEventArgs e)
+        {
+            jg.ActiveEmployee = lstEmployeeView.SelectedItem as Employee;
+            NewEmployee employee = new NewEmployee(true);
+            employee.ShowDialog();
         }
     }
 }

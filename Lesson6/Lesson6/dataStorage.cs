@@ -41,11 +41,12 @@ namespace Lesson6
         internal void RemoveDepartment(Department dp)
         {
             departments.Remove(dp);
+            jg.CurrentDepartment--;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Departments)));
         }
 
         public ObservableCollection<Department> Departments { get => departments; }
-      
-
+        
         public IEnumerator GetEnumerator()
         {
             foreach (Department dp in departments)
@@ -69,6 +70,7 @@ namespace Lesson6
                 dep.AddEmployee(employee);
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(dep.Employees)));
                 PropertyChanged?.Invoke(jg, new PropertyChangedEventArgs(nameof(jg.Departments)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Departments)));
 
             }
         }

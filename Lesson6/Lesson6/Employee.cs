@@ -9,7 +9,7 @@ namespace Lesson6
     /// <summary>
     /// Класс описывающий сотрудника 
     /// </summary>
-    class Employee
+    class Employee : IEquatable<Employee>
     {
         public string Name { get; set; }
         public string Salary { get; set; }
@@ -19,6 +19,13 @@ namespace Lesson6
             this.Name = name;
             this.Age = age;
             this.Salary = salary;
+        }
+
+        public bool Equals(Employee other)
+        {
+            return this.Name == other.Name 
+                && this.Age == other.Age
+                && this.Salary == other.Salary;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,15 @@ namespace Lesson6
     /// Обрабатываем данные ранее сохраненные 
     /// в файл 
     /// </summary>
-    class dbConnector
+    class dbConnector : INotifyPropertyChanged
     {
         enum CSV { DEPARTMENT,FIO,AGE,SALARY}
         private readonly string dbFile = "company.csv";
         private dataStorage storage;
         private static int currentIndexDepartment=0;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public int CurrentDepartment { get => currentIndexDepartment; set => currentIndexDepartment = value; }
         public dataStorage ActiveStorage => this.storage;
 
@@ -26,6 +30,7 @@ namespace Lesson6
             set
             {
                 storage.Departments[currentIndexDepartment].Employees = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Employees)));
             }
         }
 
