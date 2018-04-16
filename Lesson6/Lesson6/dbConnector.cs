@@ -17,6 +17,13 @@ namespace Lesson6
     {
         enum CSV { DEPARTMENT,FIO,AGE,SALARY}
         private readonly string dbFile = "company.csv";
+        //Строка подключения к БД
+        private readonly string dbStringConnection =
+            @"
+                Data Source=(LocalDB)\MSSQLLocalDB;
+                Initial Catalog=sc_demoLesson7.mdf;
+                Integrated Security=True;
+            ";
         private dataStorage storage;
         private static int currentIndexDepartment=0;
 
@@ -37,6 +44,33 @@ namespace Lesson6
         public dbConnector() {
             storage = new dataStorage();
             currentIndexDepartment = 0;
+        }
+
+        public void InitializationDB()
+        {
+            try
+            {
+                var tbDepartment = @"CREATE TABLE [dbo].[department]
+                                    (
+	                                    [id] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
+                                        [department_name] NVARCHAR(250) NOT NULL
+                                    )";
+                var tbEmployee= @"CREATE TABLE [dbo].[Employee]
+                                (
+	                                [id] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
+                                    [departmentid] INT NOT NULL, 
+                                    [username] NVARCHAR(250) NOT NULL, 
+                                    [birthday] DATE NOT NULL, 
+                                    [salary] INT NOT NULL, 
+                                    CONSTRAINT [FK_Employee_ToDepartment] FOREIGN KEY (departmentid) REFERENCES department (id) 
+                                )";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void LoadData()
